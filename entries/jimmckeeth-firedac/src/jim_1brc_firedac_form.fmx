@@ -1,0 +1,127 @@
+object Form13: TForm13
+  Left = 0
+  Top = 0
+  Caption = 'Form13'
+  ClientHeight = 580
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object Grid1: TGrid
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    CanFocus = True
+    ClipChildren = True
+    Position.X = 8.000000000000000000
+    Position.Y = 73.000000000000000000
+    Size.Width = 465.000000000000000000
+    Size.Height = 479.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    RowCount = 0
+    Viewport.Width = 461.000000000000000000
+    Viewport.Height = 454.000000000000000000
+  end
+  object ProgressBar1: TProgressBar
+    Align = Bottom
+    Orientation = Horizontal
+    Position.Y = 560.000000000000000000
+    Size.Width = 640.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object Layout1: TLayout
+    Align = Top
+    Size.Width = 640.000000000000000000
+    Size.Height = 65.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    object Label1: TLabel
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Position.X = 135.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 223.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Trimming = None
+      Text = 'Label1'
+      TabOrder = 1
+    end
+    object Button1: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 113.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'Button1'
+      TextSettings.Trimming = None
+      OnClick = Button1Click
+    end
+  end
+  object ListBox1: TListBox
+    Anchors = [akTop, akRight, akBottom]
+    Position.X = 481.000000000000000000
+    Position.Y = 73.000000000000000000
+    Size.Width = 151.000000000000000000
+    Size.Height = 479.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 147.000000000000000000
+    Viewport.Height = 475.000000000000000000
+  end
+  object stations: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from measurements')
+    Left = 280
+    Top = 248
+  end
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      
+        'Database=C:\Users\jim\Documents\GitHub\1brc-ObjectPascal-Delphi-' +
+        'Codolex\bin\1brc.sdb'
+      'JournalMode=Off'
+      'StringFormat=Unicode'
+      'CacheSize=1000000'
+      'DriverID=SQLite')
+    ResourceOptions.AssignedValues = [rvCmdExecMode]
+    ResourceOptions.CmdExecMode = amAsync
+    Connected = True
+    LoginPrompt = False
+    Left = 280
+    Top = 176
+  end
+  object FDScript1: TFDScript
+    SQLScripts = <
+      item
+        Name = 'create'
+        SQL.Strings = (
+          'drop table measurements;'
+          'create table measurements('
+          '  station NVARCHAR(50) NOT NULL,'
+          '  temperature SINGLE(4) NOT NULL);'
+          'PRAGMA temp_store = MEMORY;')
+      end>
+    Connection = FDConnection1
+    Params = <>
+    Macros = <>
+    FetchOptions.AssignedValues = [evItems, evAutoClose, evAutoFetchAll]
+    FetchOptions.AutoClose = False
+    FetchOptions.Items = [fiBlobs, fiDetails]
+    ResourceOptions.AssignedValues = [rvMacroCreate, rvMacroExpand, rvCmdExecMode, rvDirectExecute, rvPersistent]
+    ResourceOptions.MacroCreate = False
+    ResourceOptions.DirectExecute = True
+    Left = 184
+    Top = 248
+  end
+end
